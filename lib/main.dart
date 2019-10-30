@@ -36,10 +36,9 @@ class _State extends State<MyApp>{
   }
 
   initSocketIO(){
-    //update your domain before using
-    /*socketIO = new SocketIO("http://127.0.0.1:3000", "/chat",
-        query: "userId=21031", socketStatusCallback: _socketStatus);*/
-    socketIO = SocketIOManager().createSocketIO("http://192.168.2.3:3002", "/room", query: "userId=21031", socketStatusCallback: _socketStatus);
+    //update the domain before using
+    socketIO = SocketIOManager().createSocketIO("http://192.168.2.3:3002", "/room", query: "userId=100", socketStatusCallback: _socketStatus);
+    
     //call init socket before doing anything
     socketIO.init();
 
@@ -82,7 +81,7 @@ class _State extends State<MyApp>{
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        resizeToAvoidBottomPadding: true,
+      resizeToAvoidBottomPadding: true,
       resizeToAvoidBottomInset: true,
       appBar: new AppBar(
         title: new Text('Chat Messaging with Socket.io'),
@@ -138,32 +137,6 @@ class _State extends State<MyApp>{
         color: Colors.white,
         notchMargin: 8.0,
       ),
-    );
-  }
-
-  Widget _buildTextComposer() {
-    return new IconTheme(                                            //new
-      data: new IconThemeData(color: Theme.of(context).accentColor), //new
-      child: new Container(                                     //modified
-        margin: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: new Row(
-          children: <Widget>[
-            new Flexible(
-              child: new TextField(
-                controller: inputMsg,
-                decoration: new InputDecoration.collapsed(
-                    hintText: "Send a message"),
-              ),
-            ),
-            new Container(
-              margin: new EdgeInsets.symmetric(horizontal: 4.0),
-              child: new IconButton(
-                  icon: new Icon(Icons.send),
-                  onPressed: _sendMessage,)
-            ),
-          ],
-        ),
-      ),                                                             //new
     );
   }
 
